@@ -1,0 +1,14 @@
+* text=auto
+
+# Go source code
+*.go text eol=lf
+go.mod text eol=lf
+go.sum text eol=lf
+
+# Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# binary file
+*.exe binary
+*.dll binary
