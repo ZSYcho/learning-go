@@ -92,7 +92,7 @@ func main() {
 
 	err := savAcc.Deposit(200)
 	if err != nil {
-		fmt.Printf("Error depositing $%.2f to savings account. %v\n", 200, err)
+		fmt.Printf("Error depositing $%.2f to savings account. %v\n", 200.00, err)
 	}
 	savAcc.AddInterest()
 	err = savAcc.Withdraw(50)
