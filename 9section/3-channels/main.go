@@ -13,7 +13,7 @@ func main() {
 
 	messages := make(chan string)
 
-	users := make(chan user)
+	users := make(chan user) // Unbuffered channel
 
 	go func() {
 		fmt.Println("Sending a message to messages channel")
