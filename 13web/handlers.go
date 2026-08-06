@@ -26,7 +26,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte(homeContent))
 }
 
-func about(w http.ResponseWriter, r *http.Request) {
+func (app *application) about(w http.ResponseWriter, r *http.Request) {
 	aboutContent := `
 <h2>About</h2>
 <div>We are a small web shop doing great things!</div>`
@@ -35,7 +35,7 @@ func about(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte(aboutContent))
 }
 
-func contact(w http.ResponseWriter, r *http.Request) {
+func (app *application) contact(w http.ResponseWriter, r *http.Request) {
 	contactContent := `
 <h2>Contact</h2>
 <div>send as an email on akukopd@test.com</div>`

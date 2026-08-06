@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"log"
-	"net/http"
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -13,7 +12,6 @@ type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
 	userRepo UserRepository
-	mux      *http.ServeMux
 }
 
 // routing - mux
@@ -23,7 +21,6 @@ type application struct {
 
 func main() {
 
-	mux := http.NewServeMux()
 	db, err := connectToDatabase("users_database.db")
 	if err != nil {
 		log.Fatal(err)
@@ -34,11 +31,9 @@ func main() {
 		errorLog: log.New(os.Stderr, "ERROR\t", log.Ltime|log.LstdFlags|log.Lmicroseconds|log.Lshortfile),
 		infoLog:  log.New(os.Stdout, "INFO\t", log.Ltime|log.LstdFlags),
 		userRepo: NewUserRepository(db),
-		mux:      mux,
 	}
 
 	log.Printf("Listening on port :8080")
-	app.mount(mux)
 	if err := app.serve(); err != nil {
 		log.Fatal(err)
 	}
