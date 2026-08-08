@@ -22,8 +22,10 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		// we want to process a form here
 	}
-	homeContent := fmt.Sprintf(htmlContent, "Home", "<h1>Hello, welcome to the homepage</h1>")
-	_, _ = w.Write([]byte(homeContent))
+
+	app.render(w, "index.html", nil)
+	//homeContent := fmt.Sprintf(htmlContent, "Home", "<h1>Hello, welcome to the homepage</h1>")
+	//_, _ = w.Write([]byte(homeContent))
 }
 
 func (app *application) about(w http.ResponseWriter, r *http.Request) {

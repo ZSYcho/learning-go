@@ -9,9 +9,11 @@ import (
 )
 
 type application struct {
-	errorLog *log.Logger
-	infoLog  *log.Logger
-	userRepo UserRepository
+	errorLog    *log.Logger
+	infoLog     *log.Logger
+	userRepo    UserRepository
+	templateDir string
+	tp          *TemplateRenderer
 }
 
 // routing - mux
@@ -28,10 +30,13 @@ func main() {
 	defer db.Close()
 
 	app := &application{
-		errorLog: log.New(os.Stderr, "ERROR\t", log.Ltime|log.LstdFlags|log.Lmicroseconds|log.Lshortfile),
-		infoLog:  log.New(os.Stdout, "INFO\t", log.Ltime|log.LstdFlags),
-		userRepo: NewUserRepository(db),
+		errorLog:    log.New(os.Stderr, "ERROR\t", log.Ltime|log.LstdFlags|log.Lmicroseconds|log.Lshortfile),
+		infoLog:     log.New(os.Stdout, "INFO\t", log.Ltime|log.LstdFlags),
+		userRepo:    NewUserRepository(db),
+		templateDir: "./13web/templates",
 	}
+
+	app.tp = NewTemplateRenderer(app.templateDir, false)
 
 	log.Printf("Listening on port :8080")
 	if err := app.serve(); err != nil {
