@@ -29,7 +29,7 @@ func (t *TemplateRenderer) Render(w http.ResponseWriter, templateName string, da
 		return
 	}
 
-	err = tmpl.Execute(w, data)
+	err = tmpl.ExecuteTemplate(w, "base.html", data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -39,13 +39,13 @@ func (t *TemplateRenderer) Render(w http.ResponseWriter, templateName string, da
 func (t *TemplateRenderer) getTemplate(templateName string) (*template.Template, error) {
 	if !t.dev { // if we are not in the dev mode
 		// we got the lock, then we get template from the cache
-		t.mutex.Lock()
+		t.mutex.RLock()
 		if tmpl, ok := t.cache[templateName]; ok {
 			// if we find the template in the cache, we unlock and return it
-			t.mutex.Unlock()
+			t.mutex.RUnlock()
 			return tmpl, nil
 		}
-		t.mutex.Unlock()
+		t.mutex.RUnlock()
 	}
 
 	// if it is not in cache, parse it to cache and return the template
@@ -68,7 +68,7 @@ func (t *TemplateRenderer) parseTemplate(templateName string) (*template.Templat
 
 	files := []string{templatePath}
 
-	layoutPath := filepath.Join(t.templateDir, "layout/*.html")
+	layoutPath := filepath.Join(t.templateDir, "layouts/*.html")
 	layout, err := filepath.Glob(layoutPath)
 	if err == nil {
 		files = append(files, layout...)

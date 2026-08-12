@@ -1,14 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{{define "content"}}
+<div class="container">
+    <div class="posts-list">
+        {{range $index := 5}}
+        <div class="post-item">
+            <div class="post-rank">1</div>
+            <div class="post-content">
+                <div class="post-title">
+                    Show HN: Built a HackerNews clone in Go
+                    <a href="#" class="post-link" target="_blank">Title</a>
+                    <span class="post-domain">localhost.com</span>
 
-<h1>Homepage from template</h1>
-<p>Welcome to our simple blog</p>
-Test test test
-Hello world CHANGED
-</body>
-</html>
+                    <a href="/post/12111" class="post-link">Joseph Abah</a>
+                </div>
+                <div class="post-meta">
+                    <span class="points">2 points</span>
+                    by <a href="/user/222" class="author">AJ</a>
+                    <span class="time">1 mins go</span>
+                    | <a href="/post/2222" class="comments-link">22 comments</a>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+
+    <div class="pagination">
+        <a href="/?page=1" class="more-link">Prev</a>
+        <a href="/?page=1" class="more-link">Next</a>
+    </div>
+
+</div>
+{{end}}
