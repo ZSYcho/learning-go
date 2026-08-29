@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -28,20 +27,18 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	//_, _ = w.Write([]byte(homeContent))
 }
 
-func (app *application) about(w http.ResponseWriter, r *http.Request) {
-	aboutContent := `
-<h2>About</h2>
-<div>We are a small web shop doing great things!</div>`
+func (app *application) login(w http.ResponseWriter, r *http.Request) {
+	app.render(w, "login.html", nil)
+}
 
-	aboutContent = fmt.Sprintf(htmlContent, "About us", aboutContent) // parse the template
-	_, _ = w.Write([]byte(aboutContent))
+func (app *application) register(w http.ResponseWriter, r *http.Request) {
+	app.render(w, "register.html", nil)
+}
+
+func (app *application) about(w http.ResponseWriter, r *http.Request) {
+	app.render(w, "about.html", nil)
 }
 
 func (app *application) contact(w http.ResponseWriter, r *http.Request) {
-	contactContent := `
-<h2>Contact</h2>
-<div>send as an email on akukopd@test.com</div>`
-
-	contactContent = fmt.Sprintf(htmlContent, "Contact", contactContent)
-	_, _ = w.Write([]byte(contactContent))
+	app.render(w, "contact.html", nil)
 }
