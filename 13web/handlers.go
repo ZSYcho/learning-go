@@ -4,24 +4,9 @@ import (
 	"net/http"
 )
 
-var htmlContent = `
-<!DOCTYPE html>
-<html>
-<head><title>%s</title></head>
-<body>
-	%s
-</body>
-</html>
-`
-
 // we have three handlers
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	app.infoLog.Printf("%s %s", r.Method, r.URL)
-	if r.Method == http.MethodGet {
-		// we want to process a form here
-	}
-
 	app.render(w, "index.html", nil)
 	//homeContent := fmt.Sprintf(htmlContent, "Home", "<h1>Hello, welcome to the homepage</h1>")
 	//_, _ = w.Write([]byte(homeContent))
