@@ -1,0 +1,23 @@
+{{define "content"}}
+<div class="container">
+    <div class="auth-form">
+        <h2>Submit a post</h2>
+        {{if .Error}}
+        <div class="error-message">{{.Error}}</div>
+        {{end}}
+
+        <form action="/login" method="post" autocomplete="off">
+            <div class="form-group">
+                <label for="username">Post URL:</label>
+                <input type="text" id="username" name="username" value="{{.Username}}" required>
+            </div>
+
+
+
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+
+
+    </div>
+</div>
+{{end}}
